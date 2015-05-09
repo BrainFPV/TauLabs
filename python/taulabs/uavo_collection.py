@@ -10,7 +10,21 @@ class UAVOCollection(dict):
                 return u
         return None
 
+    def hash_from_branch(self, branch):
+        import subprocess
+        import tarfile
+        from cStringIO import StringIO
+        #
+        # Grab the exact uavo definition files from the git repo using the header's git hash
+        #
+        p = subprocess.Popen(['git', 'rev-parse', branch],
+                             stdout=subprocess.PIPE)
+
+        githash = p.communicate()[0]
+        return githash[0:-1]
+
     def from_git_hash(self, githash):
+        """ get the githash from a branch name """
         import subprocess
         import tarfile
         from cStringIO import StringIO

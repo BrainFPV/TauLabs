@@ -102,6 +102,7 @@ def main():
 
         import taulabs
         uavo_defs = taulabs.uavo_collection.UAVOCollection()
+        githash = uavo_defs.hash_from_branch(githash)
         uavo_defs.from_git_hash(githash)
 
         print "Found %d unique UAVO definitions" % len(uavo_defs)
