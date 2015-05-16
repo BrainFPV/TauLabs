@@ -1032,7 +1032,6 @@ void flightmode_menu(void)
 		[MANUALCONTROLSETTINGS_FLIGHTMODEPOSITION_STABILIZED3] = "Stabilized3",
 		[MANUALCONTROLSETTINGS_FLIGHTMODEPOSITION_AUTOTUNE] = "Autotune",
 		[MANUALCONTROLSETTINGS_FLIGHTMODEPOSITION_ALTITUDEHOLD] = "Altitude Hold",
-		[MANUALCONTROLSETTINGS_FLIGHTMODEPOSITION_VELOCITYCONTROL] = "Velocity Control",
 		[MANUALCONTROLSETTINGS_FLIGHTMODEPOSITION_POSITIONHOLD] = "Position Hold",
 		[MANUALCONTROLSETTINGS_FLIGHTMODEPOSITION_RETURNTOHOME] = "Return to Home",
 		[MANUALCONTROLSETTINGS_FLIGHTMODEPOSITION_PATHPLANNER] = "Path Planner",
@@ -1083,7 +1082,7 @@ void flightmode_menu(void)
 		}
 		y_pos += MENU_LINE_SPACING;
 	}
-	
+
 	for (int i=0; i < MANUALCONTROLSETTINGS_FLIGHTMODEPOSITION_NUMELEM; i++) {
 		if (current_state == FSM_STATE_FMODE_1 + i) {
 			if (current_event == FSM_EVENT_RIGHT) {
@@ -1097,7 +1096,7 @@ void flightmode_menu(void)
 				FlightModePosition[i] = tmp;
 				data_changed = true;
 			}
-			
+
 		}
 	}
 
@@ -1122,7 +1121,7 @@ void homeloc_menu(void)
 	draw_menu_title("Home Location");
 
 	HomeLocationSetGet(&home_set);
-	
+
 	if (home_set == HOMELOCATION_SET_TRUE) {
 		HomeLocationGet(&data);
 		sprintf(tmp_str, "Home: %0.5f %0.5f Alt: %0.1fm", (double)data.Latitude / 10000000.0, (double)data.Longitude / 10000000.0, (double)data.Altitude);
@@ -1140,7 +1139,7 @@ void homeloc_menu(void)
 			home_set = HOMELOCATION_SET_FALSE;
 			HomeLocationSetSet(&home_set);
 		}
-		
+
 	}
 
 	y_pos += MENU_LINE_SPACING;
@@ -1173,7 +1172,7 @@ void pidrate_menu(void)
 	const float limits_low[] = {0.f, 0.f, 0.f, 0.f};
 	const float limits_high[] = {.01f, .01f, .01f, 1.f};
 	const float increments[] = {1e-4f, 1e-4f, 1e-4f, 1e-2f};
-	
+
 	float pid_arr[STABILIZATIONSETTINGS_ROLLRATEPID_NUMELEM];
 	int y_pos = MENU_LINE_Y;
 	enum menu_fsm_state my_state = FSM_STATE_PIDRATE_ROLLP;
@@ -1188,10 +1187,10 @@ void pidrate_menu(void)
 			case 0:
 				StabilizationSettingsRollRatePIDGet(pid_arr);
 				break;
-			case 1: 
+			case 1:
 				StabilizationSettingsPitchRatePIDGet(pid_arr);
 				break;
-			case 2: 
+			case 2:
 				StabilizationSettingsYawRatePIDGet(pid_arr);
 				break;
 		}
@@ -1214,10 +1213,10 @@ void pidrate_menu(void)
 						case 0:
 							StabilizationSettingsRollRatePIDSet(pid_arr);
 							break;
-						case 1: 
+						case 1:
 							StabilizationSettingsPitchRatePIDSet(pid_arr);
 							break;
-						case 2: 
+						case 2:
 							StabilizationSettingsYawRatePIDSet(pid_arr);
 							break;
 					}
@@ -1234,7 +1233,7 @@ void pidrate_menu(void)
 		if (current_event == FSM_EVENT_RIGHT)
 			UAVObjSave(StabilizationSettingsHandle(), 0);
 	}
-	
+
 	y_pos += MENU_LINE_SPACING;
 	write_string("Exit", MENU_LINE_X, y_pos, 0, 0, TEXT_VA_TOP, TEXT_HA_LEFT, 0, MENU_FONT);
 	if (current_state == FSM_STATE_PIDRATE_EXIT) {
@@ -1629,4 +1628,3 @@ void sticklimits_menu(void)
 		draw_selected_icon(MENU_LINE_X - 4, y_pos + 4);
 	}
 }
-
