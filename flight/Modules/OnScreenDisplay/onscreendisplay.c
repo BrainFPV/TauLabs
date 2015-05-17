@@ -1058,7 +1058,7 @@ void render_user_page(OnScreenDisplayPageSettingsData * page)
 	if (page->Alarm) {
 		draw_alarms((int)page->AlarmPosX, (int)page->AlarmPosY, 0, 0, TEXT_VA_TOP, (int)page->AlarmAlign, 0, SIZE_TO_FONT[page->AlarmFont]);
 	}
-	
+
 	// Altitude Scale
 	if (page->AltitudeScale) {
 		if (page->AltitudeScaleSource == ONSCREENDISPLAYPAGESETTINGS_ALTITUDESCALESOURCE_BARO) {
@@ -1073,21 +1073,21 @@ void render_user_page(OnScreenDisplayPageSettingsData * page)
 		else
 			hud_draw_vertical_scale(tmp * convert_distance, 100, 1, page->AltitudeScalePos, GRAPHICS_Y_MIDDLE, 120, 10, 20, 5, 8, 11, 10000, 0);
 	}
-	
+
 	// Arming Status
 	if (page->ArmStatus) {
 		FlightStatusArmedGet(&tmp_uint8);
 		if (tmp_uint8 != FLIGHTSTATUS_ARMED_DISARMED)
 			write_string("ARMED", page->ArmStatusPosX, page->ArmStatusPosY, 0, 0, TEXT_VA_TOP, (int)page->ArmStatusAlign, 0, SIZE_TO_FONT[page->ArmStatusFont]);
 	}
-	
+
 	// Artificial Horizon
 	if (page->ArtificialHorizon) {
 		AttitudeActualRollGet(&tmp);
 		AttitudeActualPitchGet(&tmp1);
 		simple_artifical_horizon(tmp, tmp1, GRAPHICS_X_MIDDLE, GRAPHICS_Y_MIDDLE, 150, 150, page->ArtificialHorizonMaxPitch);
 	}
-	
+
 	// Battery
 	if (module_state[MODULESETTINGS_ADMINSTATE_BATTERY] == MODULESETTINGS_ADMINSTATE_ENABLED) {
 		if (page->BatteryVolt) {
@@ -1113,7 +1113,7 @@ void render_user_page(OnScreenDisplayPageSettingsData * page)
 		sprintf(tmp_str, "%0.1f", (double)(-1.f * convert_distance * tmp));
 		write_string(tmp_str, page->ClimbRatePosX, page->ClimbRatePosY, 0, 0, TEXT_VA_TOP, (int)page->ClimbRateAlign, 0, SIZE_TO_FONT[page->ClimbRateFont]);
 	}
-	
+
 	// Compass
 	if (page->Compass) {
 		AttitudeActualYawGet(&tmp);
@@ -1121,7 +1121,7 @@ void render_user_page(OnScreenDisplayPageSettingsData * page)
 			tmp += 360;
 		hud_draw_linear_compass(tmp, home_dir, 120, 180, GRAPHICS_X_MIDDLE, (int)page->CompassPos, 15, 30, 5, 8, 0);
 	}
-	
+
 	// CPU utilization
 	if (page->Cpu) {
 		SystemStatsCPULoadGet(&tmp_uint8);
@@ -1372,7 +1372,7 @@ static void onScreenDisplayTask(__attribute__((unused)) void *parameters)
 	uint8_t current_page = 0;
 	uint8_t last_page = -1;
 	float tmp;
-	
+
 	OnScreenDisplaySettingsGet(&osd_settings);
 	home_baro_altitude = 0.;
 
@@ -1415,7 +1415,7 @@ static void onScreenDisplayTask(__attribute__((unused)) void *parameters)
 			home_baro_altitude += tmp;
 		}
 	}
-	
+
 	// Create average altitude
 	home_baro_altitude /= frame_counter;
 
