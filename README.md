@@ -1,4 +1,4 @@
-# Tau Labs - Brain FPV Flight Controller
+# NOTE: Tau Labs is no longer officially supported on Brain. Please use [dRonin](http://dronin.org)
 
 This version of Tau Labs adds support for the Brain FPV Flight Controller. It closely follows the upstream "next" branch,
 the main differences to "next" are:
